@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman Game</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Mini-Games Portal</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="mainpage.html">Home</a></li>
+            <li class="dropdown">
+                <a href="games.html">Games</a>
+                <ul class="dropdown-content">
+                    <li><a href="number_guesser.html">Number Guesser</a></li>
+                    <li><a href="rock_paper_scissors.html">Rock Paper Scissors</a></li>
+                    <li><a href="hangman.html">Hangman</a></li>
+                    <li><a href="blackjack.html">Blackjack</a></li>
+                    <li><a href="tic_tac_toe.html">Tic Tac Toe</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+    </nav>
+
+    <h1>Number Guesser Game (between 1 and 100)</h1>
+    <p>Attempt number <span id="attempt">1</span>: Please enter a number: <input type="number" id="userGuess" onkeydown="if (event.keyCode === 13) checkGuess()"></p>
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="message"></p>
+
+    <script>
+        const maxAttempts = 5; // Set the maximum number of attempts
+        const randomNumber = Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
+        let attempt = 1;
+
+        function checkGuess() {
+            const userGuess = parseFloat(document.getElementById("userGuess").value);
+            const messageElement = document.getElementById("message");
+            const attemptElement = document.getElementById("attempt");
+
+            if (!isNaN(userGuess)) {
+                const difference = Math.abs(userGuess - randomNumber);
+
+                if (difference === 0) {
+                    messageElement.textContent = `Congratulations! You guessed correctly. The computer generated number and the number you guessed now is ${randomNumber}`;
+                    document.getElementById("userGuess").disabled = true; // Disable input
+                } else if (difference <= 10) {
+                    messageElement.textContent = 'Warm';
+                } else {
+                    messageElement.textContent = 'Cold';
+                }
+
+                if (attempt < maxAttempts) {
+                    attempt++;
+                    attemptElement.textContent = attempt;
+                    messageElement.textContent += ' Try again!';
+                } else {
+                    messageElement.textContent = `Sorry, you've run out of attempts. The computer generated number is ${randomNumber}`;
+                    document.getElementById("userGuess").disabled = true; // Disable input
+                }
+            } else {
+                messageElement.textContent = 'Invalid input. Please enter a valid number.';
+            }
+        }
+    </script>
+</body>
+</html>

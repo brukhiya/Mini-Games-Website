@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hangman Game</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Mini-Games Portal</h1>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="mainpage.html">Home</a></li>
+            <li class="dropdown">
+                <a href="games.html">Games</a>
+                <ul class="dropdown-content">
+                    <li><a href="number_guesser.html">Number Guesser</a></li>
+                    <li><a href="rock_paper_scissors.html">Rock Paper Scissors</a></li>
+                    <li><a href="hangman.html">Hangman</a></li>
+                    <li><a href="blackjack.html">Blackjack</a></li>
+                    <li><a href="tic_tac_toe.html">Tic Tac Toe</a></li>
+                </ul>
+            </li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li><a href="leaderboard.html">Leaderboard</a></li>
+        </ul>
+    </nav>
+
+    <h1>Hangman Game</h1>
+    <div id="hangman-container">
+        <!-- Add hangman graphics here -->
+    </div>
+    <div id="word">
+        <!-- Display the word to guess here -->
+    </div>
+    <div id="guessed-letters">
+        <!-- Display guessed letters here -->
+    </div>
+    <div id="tries-left">
+        <!-- Display the number of tries left here -->
+    </div>
+    <div id="message">
+        <!-- Display game messages here  -->
+    </div>
+    <input type="text" id="guess-input" placeholder="Guess a letter">
+    <button id="guess-button">Submit Guess</button>
+
+
+    <script>
+        const wordList = [ "playground", "icecream", "school", "friends", "homework",
+            "toys", "birthday", "bicycle", "adventure", "storybook",
+            "candy", "pizza", "family", "cartoon", "puppy",
+            "sunshine", "games", "playdate", "treehouse", "hideandseek",
+            "cooking", "cleaning", "laundry", "children", "shopping",
+            "dinner", "chores", "breakfast", "family", "budget",
+            "recipe", "garden", "routine", "organize", "lunch",
+            "errands", "relax", "homework", "baking", "television"];
+        
+        let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+        let remainingTries = 6;
+        let guessedLetters = [];
+        let displayedWord = "_".repeat(randomWord.length);
+        
+        // Function to update the game display
+        function updateDisplay() {
+            document.getElementById("word").textContent = displayedWord;
+            document.getElementById("guessed-letters").textContent = "Your guessed letters are: " + guessedLetters.join(", ");
+            document.getElementById("tries-left").textContent = `Tries Left: ${remainingTries}`;
+        }
+
+        // Function to handle player guesses
+        function handleGuess() {
+            const guessInput = document.getElementById("guess-input");
+            const guess = guessInput.value.toLowerCase();
+
+            if (guessedLetters.includes(guess)) {
+                document.getElementById("message").textContent = "You already guessed that letter.";
+            } else if (!guess.match(/^[a-zA-Z]$/)) {
+                document.getElementById("message").textContent = "Please enter a valid letter.";
+            } else {
+                guessedLetters.push(guess);
+
+                if (randomWord.includes(guess)) {
+                    updateDisplayedWord(guess);
+                    document.getElementById("message").textContent = "Correct guess!";
+                } else {
+                    remainingTries--;
+                    document.getElementById("message").textContent = "Incorrect guess. Tries left: " + remainingTries;
+                }
+            }
+
+            guessInput.value = "";
+            updateDisplay();
+
+            if (remainingTries <= 0 || displayedWord === randomWord) {
+                endGame();
+            }
+        }
+
+        // Function to update the displayed word with correctly guessed letters
+        function updateDisplayedWord(letter) {
+            let newDisplayedWord = "";
+            for (let i = 0; i < randomWord.length; i++) {
+                if (randomWord[i] === letter) {
+                    newDisplayedWord += letter;
+                } else {
+                    newDisplayedWord += displayedWord[i];
+                }
+            }
+            displayedWord = newDisplayedWord;
+        }
+
+        // Function to end the game
+        function endGame() {
+            document.getElementById("guess-button").disabled = true;
+            const messageElement = document.getElementById("message");
+            if (displayedWord === randomWord) {
+                messageElement.textContent = "Congratulations! You've won!";
+            } else {
+                messageElement.textContent = "Sorry, you've run out of tries. The word was: " + randomWord;
+            }
+        }
+
+        // Initialize the game
+        updateDisplay();
+        document.getElementById("guess-button").addEventListener("click", handleGuess);
+
+        // Add an event listener for the Enter key press
+    document.getElementById("guess-input").addEventListener("keypress", function(event) {
+        if (event.key === "Enter") {
+            handleGuess();
+        }
+    });
+
+    // Add an event listener to the guess button
+    document.getElementById("guess-button").addEventListener("click", handleGuess);
+
+    </script>
+</body>
+</html>
