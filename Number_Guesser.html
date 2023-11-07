@@ -32,16 +32,32 @@
     <p>Attempt number <span id="attempt">1</span>: Please enter a number: <input type="number" id="userGuess" onkeydown="if (event.keyCode === 13) checkGuess()"></p>
     <button onclick="checkGuess()">Submit Guess</button>
     <p id="message"></p>
+    <button id="restartButton" onclick="restartGame()">Restart</button>
+
 
     <script>
-        const maxAttempts = 5; // Set the maximum number of attempts
+        const maxAttempts = 10; // Set the maximum number of attempts
         const randomNumber = Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
         let attempt = 1;
+        let gameIsOver = false;
+
+        // Initialize the game
+        function initializeGame() {
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            attempt = 1;
+            gameIsOver = false;
+            document.getElementById("userGuess").disabled = false;
+            document.getElementById("message").textContent = "";
+            document.getElementById("attempt").textContent = attempt;
+            document.getElementById("restartButton").textContent = "Restart";
+        }
 
         function checkGuess() {
             const userGuess = parseFloat(document.getElementById("userGuess").value);
             const messageElement = document.getElementById("message");
             const attemptElement = document.getElementById("attempt");
+            const userGuessInput = document.getElementById("userGuess"); // Get the input element
+
 
             if (!isNaN(userGuess)) {
                 const difference = Math.abs(userGuess - randomNumber);
@@ -62,11 +78,26 @@
                 } else {
                     messageElement.textContent = `Sorry, you've run out of attempts. The computer generated number is ${randomNumber}`;
                     document.getElementById("userGuess").disabled = true; // Disable input
+                    gameIsOver = true;
+                    document.getElementById("restartButton").textContent = "Play Again";
                 }
+                userGuessInput.value = "";
             } else {
                 messageElement.textContent = 'Invalid input. Please enter a valid number.';
             }
         }
+        
+
+        function restartGame() {
+        initializeGame();
+        const userGuessInput = document.getElementById("userGuess");
+        userGuessInput.value = ""; // Clear the input box
+        }
+
+
+        // Call initializeGame() to start the game when the page loads
+        initializeGame();
+
     </script>
 </body>
 </html>
