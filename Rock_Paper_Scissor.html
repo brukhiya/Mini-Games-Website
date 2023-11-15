@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rock, Paper, Scissors Game</title>
+</head>
+<body>
+    <h1>Rock, Paper, Scissors Game</h1>
+    <p>Click the buttons to play the game.</p>
+    <button id="startGame">Start Game</button>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissor">Scissor</button>
+    <button id="playAgain">Play Again</button>
+    <p id="result"></p>
+    <p id="finalScore"></p>
+    <p id="gameResult"></p>
+    <script>
+        const startGameButton = document.getElementById('startGame');
+        const rockButton = document.getElementById('rock');
+        const paperButton = document.getElementById('paper');
+        const scissorButton = document.getElementById('scissor');
+        const playAgainButton = document.getElementById('playAgain');
+        const resultMessage = document.getElementById('result');
+        const finalScoreMessage = document.getElementById('finalScore');
+        const gameResultMessage = document.getElementById('gameResult');
+        let userScore = 0;
+        let compScore = 0;
+        let roundsLeft = 5;
+        startGameButton.addEventListener('click', () => {
+            startGameButton.style.display = 'none';
+            rockButton.style.display = 'inline-block';
+            paperButton.style.display = 'inline-block';
+            scissorButton.style.display = 'inline-block';
+            playAgainButton.style.display = 'none';
+            playGame();
+        });
+        function getUserChoice(choice) {
+            const userChoice = choice;
+            const compChoice = getCompChoice();
+            const roundWinner = determineRoundWinner(userChoice, compChoice);
+            printRoundScore(roundWinner);
+            if (roundWinner === 'user') {
+                userScore++;
+            } else if (roundWinner === 'computer') {
+                compScore++;
+            }
+            roundsLeft--;
+            if (roundsLeft === 0) {
+                endGame();
+            }
+        }
+        function getCompChoice() {
+            const choices = ['rock', 'paper', 'scissor'];
+            const randomIndex = Math.floor(Math.random() * 3);
+            return choices[randomIndex];
+        }
+        function determineRoundWinner(userChoice, compChoice) {
+            if (userChoice === compChoice) {
+                return 'tie';
+            } else if (
+                (userChoice === 'rock' && compChoice === 'scissor') ||
+                (userChoice === 'scissor' && compChoice === 'paper') ||
+                (userChoice === 'paper' && compChoice === 'rock')
+            ) {
+                return 'user';
+            } else {
+                return 'computer';
+            }
+        }
+        function printRoundScore(roundResult) {
+            resultMessage.textContent = roundResult === 'tie' ? "It's a tie! Try Again!" : (roundResult === 'user' ? '--You won this round' : 'Computer won this round--');
+        }
+        function printFinalScore() {
+            finalScoreMessage.textContent = `Final Scores: User Score is ${userScore}, Computer Score is ${compScore}`;
+        }
+        function playGame() {
+            roundsLeft = 5;
+            userScore = 0;
+            compScore = 0;
+            resultMessage.textContent = '';
+            finalScoreMessage.textContent = '';
+            rockButton.style.display = 'inline-block';
+            paperButton.style.display = 'inline-block';
+            scissorButton.style.display = 'inline-block';
+        }
+        function endGame() {
+            rockButton.style.display = 'none';
+            paperButton.style.display = 'none';
+            scissorButton.style.display = 'none';
+            playAgainButton.style.display = 'inline-block';
+            printFinalScore();
+            if (userScore < compScore) {
+                gameResultMessage.textContent = "Computer won the game.";
+            } else if (compScore < userScore) {
+                gameResultMessage.textContent = "User won the game.";
+            } else {
+                gameResultMessage.textContent = "It was a tie game.";
+            }
+        }
+        rockButton.addEventListener('click', function() {
+         getUserChoice('rock');
+        });
+        paperButton.addEventListener('click', function() {
+            getUserChoice('paper');
+        });
+        scissorButton.addEventListener('click', function() {
+            getUserChoice('scissor');
+        });
+        playAgainButton.addEventListener('click', function() {
+        startGameButton.style.display = 'inline-block';
+        rockButton.style.display = 'none';
+        paperButton.style.display = 'none';
+        scissorButton.style.display = 'none';
+        playAgainButton.style.display = 'none';
+        // Clear scores and messages
+        userScore = 0;
+        compScore = 0;
+        roundsLeft = 5;
+        resultMessage.textContent = '';
+        finalScoreMessage.textContent = '';
+        gameResultMessage.textContent = '';
+        playGame();
+    });
+    </script>
+</body>
+</html>
