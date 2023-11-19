@@ -1,0 +1,106 @@
+body, html{
+    height: 100%;
+   }
+   
+   body{
+       /*background-color: #05111c;*/
+       background-image: url("images/bg1024.jpg");
+       background-repeat: no-repeat;
+       background-attachment: fixed;
+       background-size: cover; 
+   }
+
+   .logo {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add margin for spacing */
+}
+   
+   h1{
+       font-family: Verdana, Geneva, Tahoma, sans-serif;
+       font-size: 36px;
+       color: white;
+       text-align: center;
+   }
+   
+   h2{
+       font-family: Verdana, Geneva, Tahoma, sans-serif;
+       font-size: 26px;
+       color: white;
+       text-align: center;
+   }
+   
+   p{
+       font-size: 1rem;
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       color: white;
+       text-align: center;
+   }
+   
+   /*Hangman Styles START */
+   .button-container {
+       text-align: center; /* Center-align the buttons */
+       margin-top: 10px; /* Add space between the text/input and buttons */
+     }
+     
+   .description{
+       font-size: 1rem;
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       color: white;
+       text-align: justified;
+   }
+   
+   .gametitle{
+       font-size: 2rem;
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       color: white;
+       text-align: center;
+   }
+   
+   .playgame{
+       font-size: 2rem;
+       font-family: Georgia, 'Times New Roman', Times, serif;
+       color: white;
+       text-align: center;
+   }
+   
+   #id{
+       font-size: 3rem;
+       font-family: Arial, Helvetica, sans-serif;
+       color: white;
+       text-align: center; 
+       z-index: 2;
+   }
+   
+   .game-section{
+       padding: 5px 0;
+       box-sizing: content-box;
+       width: 100%;
+   
+       color: white;
+       text-align: center;
+       margin-top: 10px;
+       z-index: 1;
+   }
+   
+   .games{
+       padding: 1px 0;  
+       color: white;
+       text-align: center;
+       z-index: 2;
+   }
+   
+   .gaming{
+       color: black;
+       z-index: 2;
+   }
+   
+   @media screen and (max-width: 767px) {
+    /* Your CSS styles for cellphones go here */
+  }
+  /* Styles for desktops (min-width: 768px) */
+  @media screen and (min-width: 768px) {
+    /* Your CSS styles for desktops go here */
+  }
+   
+   

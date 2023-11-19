@@ -1,142 +1,133 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="hangman.css">
     <title>Hangman Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-
 <body>
-    <header>
-        <h1>Mini-Games Portal</h1>
+    <header class="container">
+        <div class="navigation">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li class="dropdown"><a href="#">Games</a>
+                <div class="dropdown-content">
+                    <a href="numberguesser.html">Number Guesser</a>
+                    <a href="hangman.html">Hangman</a>
+                    <a href="rockpaperscissors.html">Rock Paper Scissors</a>
+                    <a href="tictactoe.html">Tic Tac Toe</a>
+                    <a href="blackjack.html">BlackJack</a>
+                </div></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+        </div>
     </header>
-
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="mainpage.html">Home</a></li>
-            <li class="dropdown">
-                <a href="games.html">Games</a>
-                <ul class="dropdown-content">
-                    <li><a href="number_guesser.html">Number Guesser</a></li>
-                    <li><a href="rock_paper_scissors.html">Rock Paper Scissors</a></li>
-                    <li><a href="hangman.html">Hangman</a></li>
-                    <li><a href="blackjack.html">Blackjack</a></li>
-                    <li><a href="tic_tac_toe.html">Tic Tac Toe</a></li>
-                </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-
-    <h1>Hangman Game</h1>
-    <div id="hangman-container">
-        <!-- Add hangman graphics here -->
+    <div class="game-section">
+        <h2>How to play Hangman Game</h2>
+        <p class="description">Hangman is a simple word-guessing game. Players try to figure out an unknown word by guessing letters. <p class="description">If too many letters which do not appear in the word are guessed, the player is hanged (and loses)..</p>
+        <div class="games">
+        <div class="gaming"><img src="hangman_low.jpg" alt="">
+        </div>
+        <!--<h1 class="gametitle">Hangman Game</h1> -->
+        <p class="playgame">Guess the name of this city:</p>
+        <p id="wordDisplay"></p>
+        <p>Incorrect guesses: <span id="incorrectGuesses"></span></p>
+        <p id="hangmanDrawing"></p>
+        <p>Guess a letter:</p>
+        <input type="text" id="letterInput">
+        <button onclick="guessLetter()">Submit</button>
+        </div>
+        <p id="message"></p>
+    <div class="content" id="content">
+        <div class="image-section">
+            <a href="hangman.html" target="_blank">
+                <img style="height: 350px; width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 0%;" src="images/hangman_low.jpg" alt="Hangman" class="full-width-image button-effect">
+            </a>
     </div>
-    <div id="word">
-        <!-- Display the word to guess here -->
-    </div>
-    <div id="guessed-letters">
-        <!-- Display guessed letters here -->
-    </div>
-    <div id="tries-left">
-        <!-- Display the number of tries left here -->
-    </div>
-    <div id="message">
-        <!-- Display game messages here  -->
-    </div>
-    <input type="text" id="guess-input" placeholder="Guess a letter">
-    <button id="guess-button">Submit Guess</button>
-
-
-    <script>
-        const wordList = [ "playground", "icecream", "school", "friends", "homework",
-            "toys", "birthday", "bicycle", "adventure", "storybook",
-            "candy", "pizza", "family", "cartoon", "puppy",
-            "sunshine", "games", "playdate", "treehouse", "hideandseek",
-            "cooking", "cleaning", "laundry", "children", "shopping",
-            "dinner", "chores", "breakfast", "family", "budget",
-            "recipe", "garden", "routine", "organize", "lunch",
-            "errands", "relax", "homework", "baking", "television"];
-        
-        let randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-        let remainingTries = 6;
-        let guessedLetters = [];
-        let displayedWord = "_".repeat(randomWord.length);
-        
-        // Function to update the game display
-        function updateDisplay() {
-            document.getElementById("word").textContent = displayedWord;
-            document.getElementById("guessed-letters").textContent = "Your guessed letters are: " + guessedLetters.join(", ");
-            document.getElementById("tries-left").textContent = `Tries Left: ${remainingTries}`;
-        }
-
-        // Function to handle player guesses
-        function handleGuess() {
-            const guessInput = document.getElementById("guess-input");
-            const guess = guessInput.value.toLowerCase();
-
-            if (guessedLetters.includes(guess)) {
-                document.getElementById("message").textContent = "You already guessed that letter.";
-            } else if (!guess.match(/^[a-zA-Z]$/)) {
-                document.getElementById("message").textContent = "Please enter a valid letter.";
-            } else {
-                guessedLetters.push(guess);
-
-                if (randomWord.includes(guess)) {
-                    updateDisplayedWord(guess);
-                    document.getElementById("message").textContent = "Correct guess!";
-                } else {
-                    remainingTries--;
-                    document.getElementById("message").textContent = "Incorrect guess. Tries left: " + remainingTries;
+        <script src="hangman.js">
+            let words = ["singapore", "alexandria", "guadalajara", "philadelphia", "bangkok"]; // List of words to choose from
+            let word = words[Math.floor(Math.random() * words.length)]; // Select a random word from the list
+            let guessedWord = Array(word.length).fill("_"); // Display of guessed letters
+            let incorrectGuesses = 0; // Number of incorrect guesses
+            let maxIncorrectGuesses = 6; // Maximum allowed incorrect guesses
+            let hangmanFigures = [
+                "  ____ \n |    | \n |     \n |     \n |     \n_|_", // Empty
+                "  ____ \n |    | \n |    O \n |     \n |     \n_|_", // Head
+                "  ____ \n |    | \n |    O \n |    | \n |     \n_|_", // Head and body
+                "  ____ \n |    | \n |    O \n |   /| \n |     \n_|_", // Head, body, and one arm
+                "  ____ \n |    | \n |    O \n |   /|\\ \n |     \n_|_", // Head, body, and both arms
+                "  ____ \n |    | \n |    O \n |   /|\\ \n |   / \n_|_", // Almost hanged
+                "  ____ \n |    | \n |    O \n |   /|\\ \n |   / \\ \n_|_" // Hanged
+            ];
+            // Function to update the word display
+            function updateWordDisplay() {
+                document.getElementById("wordDisplay").innerText = guessedWord.join(" ");
+            }
+            // Function to update the hangman figure
+            function updateHangmanFigure() {
+                document.getElementById("hangmanDrawing").innerText = hangmanFigures[incorrectGuesses];
+            }
+            // Function to handle the letter guess
+            function guessLetter() {
+                let letter = document.getElementById("letterInput").value.toLowerCase();
+                if (letter.length !== 1 || !letter.match(/[a-z]/i)) {
+                    alert("Please enter a valid letter.");
+                    return;
                 }
-            }
-
-            guessInput.value = "";
-            updateDisplay();
-
-            if (remainingTries <= 0 || displayedWord === randomWord) {
-                endGame();
-            }
-        }
-
-        // Function to update the displayed word with correctly guessed letters
-        function updateDisplayedWord(letter) {
-            let newDisplayedWord = "";
-            for (let i = 0; i < randomWord.length; i++) {
-                if (randomWord[i] === letter) {
-                    newDisplayedWord += letter;
+                if (word.includes(letter)) {
+                    for (let i = 0; i < word.length; i++) {
+                        if (word[i] === letter) {
+                            guessedWord[i] = letter;
+                        }
+                    }
                 } else {
-                    newDisplayedWord += displayedWord[i];
+                    incorrectGuesses++;
+                    document.getElementById("incorrectGuesses").innerText += " " + letter;
+                    updateHangmanFigure();
                 }
+                updateWordDisplay();
+                if (guessedWord.join("") === word) {
+                    alert("Congratulations! You guessed the name of the city.");
+                } else if (incorrectGuesses === maxIncorrectGuesses) {
+                    alert("Sorry, you've reached the maximum number of incorrect guesses. The city was: " + word);
+                }
+                document.getElementById("letterInput").value = "";
             }
-            displayedWord = newDisplayedWord;
-        }
-
-        // Function to end the game
-        function endGame() {
-            document.getElementById("guess-button").disabled = true;
-            const messageElement = document.getElementById("message");
-            if (displayedWord === randomWord) {
-                messageElement.textContent = "Congratulations! You've won!";
-            } else {
-                messageElement.textContent = "Sorry, you've run out of tries. The word was: " + randomWord;
-            }
-        }
-
-        // Initialize the game
-        updateDisplay();
-        document.getElementById("guess-button").addEventListener("click", handleGuess);
-
-        // Add an event listener for the Enter key press
-    document.getElementById("guess-input").addEventListener("keypress", function(event) {
-        if (event.key === "Enter") {
-            handleGuess();
-        }
-    });
-
-    // Add an event listener to the guess button
-    document.getElementById("guess-button").addEventListener("click", handleGuess);
-
-    </script>
+            // Initialize the display
+            updateWordDisplay();
+            updateHangmanFigure();
+        </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

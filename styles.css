@@ -1,0 +1,247 @@
+body, html{
+    height: 100%;
+}
+body{
+    /*background-color: #05111C;*/
+    background-image: url("images/bg1024.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+/* CSS styles for the logo */
+.logo {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Add margin for spacing */
+}
+
+h1{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 36px;
+    color: white;
+    text-align: center;
+}
+p{
+    font-size: 1rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: white;
+    text-align: center;
+}
+.container{
+    max-width: 1024px;
+    height: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    display: grid;
+}
+.content{
+    width: 100%;
+    padding: 10px;
+}
+/* Games Buttons*/
+.full-width-image{
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+}
+.navigation{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 7px;
+}
+.nav-links{
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+.nav-links li{
+    margin-right: 20px
+}
+.nav-links li a{
+    display: inline-block;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 1.25rem;
+}
+.nav-links a:hover{
+    background-color: #dddddd6c;
+}
+.dropdown-content{
+    display: none;
+    position: absolute;
+    background-color: #dddddd6c;
+    min-width: 160px;
+    z-index: 1;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, .2);
+}
+.dropdown:hover .dropdown-content{
+    display: block;
+}
+.button-effect{
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+/*wiggle animation*/
+.button-effect:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+}
+.image-section{
+    display: flex;
+    flex-direction: column;
+}
+.image-section a{
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 20px;
+    display: block;
+}
+.image-section a:hover::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, .3);
+    z-index: 1;
+}
+.image-section a:hover .button-effect{
+    transform: translateY(-5px);
+}
+.testimonials{
+    padding: 40px 0;
+    background: #F1F1F1;
+    color: #434343;
+    text-align: center;
+}
+.inner{
+    max-width: 1200px;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+/*border{
+    width: 160px;
+    height: 5px;
+    background: #72EB21;
+    margin: 26px auto;
+}*/
+.testimonial-section{
+    margin-top: 40px;
+}
+.testimonials{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+.testimonial{
+    margin: 0 10px;
+}
+.testi-title{
+    color: white;
+   text-align: center;
+}
+.small-image{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.review{
+    color: #434343;
+    text-align: center;
+}
+.video-section{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+.video-section{
+    background-color: #213348;
+    margin: 0px -20px 30px -20px;
+    padding: 20px;
+    padding-bottom: 50%;
+    position: relative;
+}
+div.video > iframe{
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    width: 90%;
+    height: 90%;
+}
+/*contact form box*/
+.contact-input{
+    display: block;
+    width: 270px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.contact-form form{
+    width: 50%;
+    margin: 0 auto;
+}
+/*submit*/
+.contact-button{
+    padding: 12px 24px;
+    background-color: #4C7AAF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+.contact-button:hover{
+    background-color: #173455;
+    transform: scale(1.1);
+}
+/*footer*/
+footer{
+    background-color: #213348;
+    padding: 40;
+    text-align: center;
+}
+.footer-icons{
+    margin-bottom: 20px;
+}
+.social-icon{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+.small-info{
+    font-size: 10px;
+}
+#thank-you-message{
+    text-align: center;
+    text-wrap: wrap;
+    padding: 15px auto;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    margin-top: 20px;
+}
+@media screen and (max-width: 767px) {
+    /* Your CSS styles for cellphones go here */
+  }
+  /* Styles for desktops (min-width: 768px) */
+  @media screen and (min-width: 768px) {
+    /* Your CSS styles for desktops go here */
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
