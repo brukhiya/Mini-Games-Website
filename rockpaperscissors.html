@@ -1,19 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Rock, Paper, Scissors Game</title>
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <h1>Rock, Paper, Scissors Game</h1>
+    <header class="container">
+        <div class="navigation">
+            <img src="images/logo.png" alt="Logo" class="logo">
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li class="dropdown"><a href="#">Games</a>
+                <div class="dropdown-content">
+                    <a href="numberguesser.html">Number Guesser</a>
+                    <a href="hangman.html">Hangman</a>
+                    <a href="rockpaperscissors.html">Rock Paper Scissors</a>
+                    <a href="tictactoe.html">Tic Tac Toe</a>
+                    <a href="blackjack.html">BlackJack</a>
+                </div></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+        </div>
+    </header>
+    <h1>Rock Paper Scissors Game</h1>
     <p>Click the buttons to play the game.</p>
-    <button id="startGame">Start Game</button>
-    <button id="rock">Rock</button>
-    <button id="paper">Paper</button>
-    <button id="scissor">Scissor</button>
-    <button id="playAgain">Play Again</button>
+    <img style="height: 280px; width: 450px; margin-left: auto; margin-right: auto;" src="images/rockpaper_low.jpg" alt="Rock Paper Scissors" class="full-width-image button-effect">
+    <p style="margin-top: 0;">
+        Instructions : Rock crushes scissors, scissors cut paper, and paper covers rock. Lets see who wins each round!
+    </p>
+    <div class="rock-button-container">
+        <button id="startGame">Start Game</button>
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissor">Scissor</button>
+        <button id="playAgain">Play Again</button>
+    </div>
+    <table border="1" style="margin-top: 20px;">
+        <caption>Scoreboard</caption>
+        <thead>
+            <tr>
+                <th>Round</th>
+                <th>Player</th>
+                <th>Computer</th>
+            </tr>
+        </thead>
+        <tbody id="scoreTableBody">
+            <!-- Scores will be dynamically added here -->
+        </tbody>
+    </table>
     <p id="result"></p>
     <p id="finalScore"></p>
-    <p id="gameResult"></p>
+    <p style="margin-top: 0%;margin-bottom: 0%;" id="gameResult"></p>
     <script>
         const startGameButton = document.getElementById('startGame');
         const rockButton = document.getElementById('rock');
@@ -34,6 +72,20 @@
             playAgainButton.style.display = 'none';
             playGame();
         });
+        function updateScoreTable(round, userScore, compScore) {
+        const scoreTableBody = document.getElementById('scoreTableBody');
+        const newRow = document.createElement('tr');
+        const roundCell = document.createElement('td');
+        const playerCell = document.createElement('td');
+        const computerCell = document.createElement('td');
+        roundCell.textContent = round;
+        playerCell.textContent = userScore;
+        computerCell.textContent = compScore;
+        newRow.appendChild(roundCell);
+        newRow.appendChild(playerCell);
+        newRow.appendChild(computerCell);
+        scoreTableBody.appendChild(newRow);
+    }
         function getUserChoice(choice) {
             const userChoice = choice;
             const compChoice = getCompChoice();
@@ -48,6 +100,7 @@
             if (roundsLeft === 0) {
                 endGame();
             }
+            updateScoreTable(5 - roundsLeft , userScore, compScore); // Update table with current scores
         }
         function getCompChoice() {
             const choices = ['rock', 'paper', 'scissor'];
@@ -119,8 +172,17 @@
         resultMessage.textContent = '';
         finalScoreMessage.textContent = '';
         gameResultMessage.textContent = '';
+        const scoreTableBody = document.getElementById('scoreTableBody');
+        scoreTableBody.innerHTML = '';
         playGame();
     });
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
