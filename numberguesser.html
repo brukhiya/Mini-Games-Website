@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hangman Game</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Number Guesser Game</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-    <header>
-        <h1>Mini-Games Portal</h1>
-    </header>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul>
-            <li><a href="mainpage.html">Home</a></li>
-            <li class="dropdown">
-                <a href="games.html">Games</a>
-                <ul class="dropdown-content">
-                    <li><a href="number_guesser.html">Number Guesser</a></li>
-                    <li><a href="rock_paper_scissors.html">Rock Paper Scissors</a></li>
-                    <li><a href="hangman.html">Hangman</a></li>
-                    <li><a href="blackjack.html">Blackjack</a></li>
-                    <li><a href="tic_tac_toe.html">Tic Tac Toe</a></li>
-                </ul>
-            </li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+    <header class="container">
+        <div class="navigation">
+            <img src="images/logo.png" alt="Logo" class="logo">
+
+            <ul class="nav-links">
+                <li><a href="home.html">Home</a></li>
+                <li class="dropdown"><a href="#">Games</a>
+                <div class="dropdown-content">
+                    <a href="numberguesser.html">Number Guesser</a>
+                    <a href="hangman.html">Hangman</a>
+                    <a href="rockpaperscissors.html">Rock Paper Scissors</a>
+                    <a href="tictactoe.html">Tic Tac Toe</a>
+                    <a href="blackjack.html">BlackJack</a>
+                </div></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="leaderboard.html">Leaderboard</a></li>
+            </ul>
+        </div>
+    </header>
+    
 
     <h1>Number Guesser Game (between 1 and 100)</h1>
     <p>Attempt number <span id="attempt">1</span>: Please enter a number: <input type="number" id="userGuess" onkeydown="if (event.keyCode === 13) checkGuess()"></p>
-    <button onclick="checkGuess()">Submit Guess</button>
+    <div class="button-container">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <button id="restartButton" onclick="restartGame()">Restart</button>
+    </div>    
     <p id="message"></p>
-    <button id="restartButton" onclick="restartGame()">Restart</button>
+
+    <div class="content" id="content">
+        <div class="image-section">
+            <a href="numberguesser.html" target="_blank">
+                <img style="height: 350px; width: 500px; margin-left: auto; margin-right: auto; margin-bottom: 0%;" src="images/numberguesser_low.jpg" alt="Number Guesser" class="full-width-image button-effect">
+            </a>
+            <p style="margin-top: 0;">
+               Instructions: You'll keep guessing numbers until you find the computer's number.</p>
+                <p style="margin-top: 0;"> If the guess is within 10 of the actual number, You're "Warm". If the guess is more than 10 away from the actual number, You're "Cold"
+            </p>
+        </div>
+        </div>
+
 
 
     <script>
         const maxAttempts = 10; // Set the maximum number of attempts
-        const randomNumber = Math.floor(Math.random() * 100) + 1; // Generates a random number between 1 and 100
+        const randomNumber = Math.floor(Math.random() * 50) + 1; // Generates a random number between 1 and 50
         let attempt = 1;
         let gameIsOver = false;
 
