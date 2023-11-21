@@ -53,13 +53,13 @@
 
     <script>
         const maxAttempts = 10; // Set the maximum number of attempts
-        const randomNumber = Math.floor(Math.random() * 50) + 1; // Generates a random number between 1 and 50
+        let randomNumber = Math.floor(Math.random() * 50) + 1; // Generates a random number between 1 and 50
         let attempt = 1;
         let gameIsOver = false;
 
         // Initialize the game
         function initializeGame() {
-            randomNumber = Math.floor(Math.random() * 100) + 1;
+            randomNumber = Math.floor(Math.random() * 50) + 1;
             attempt = 1;
             gameIsOver = false;
             document.getElementById("userGuess").disabled = false;
